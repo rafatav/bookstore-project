@@ -1,6 +1,7 @@
 package com.bookstore.bookstore.entities;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 public class Order {
@@ -8,6 +9,12 @@ public class Order {
     private Long id;
     private Instant moment;
     private StatusOrder status;
+
+    private User client;
+
+    private List<Product> products;
+
+    private Payment payment;
 
     public Order() {
     }

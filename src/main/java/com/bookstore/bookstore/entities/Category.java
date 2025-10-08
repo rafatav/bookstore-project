@@ -1,11 +1,14 @@
 package com.bookstore.bookstore.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Category {
 
     private Long id;
     private String name;
+
+    private List<Product> products;
 
     public Category() {
     }

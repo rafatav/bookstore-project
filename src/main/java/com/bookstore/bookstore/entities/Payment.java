@@ -8,6 +8,8 @@ public class Payment {
     private Long id;
     private Instant moment;
 
+    private Order order;
+
     public Payment() {
     }
 

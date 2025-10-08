@@ -1,5 +1,6 @@
 package com.bookstore.bookstore.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Product {
@@ -9,6 +10,10 @@ public class Product {
     private String description;
     private Double price;
     private String imgUrl;
+
+    private List<Order> orders;
+
+    private List<Category> categories;
 
     public Product() {
     }

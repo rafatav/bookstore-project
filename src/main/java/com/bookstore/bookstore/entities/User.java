@@ -1,6 +1,7 @@
 package com.bookstore.bookstore.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -11,6 +12,8 @@ public class User {
     private String phone;
     private LocalDate birthDate;
     private String password;
+
+    private List<Order> orders;
 
     public User() {
     }
