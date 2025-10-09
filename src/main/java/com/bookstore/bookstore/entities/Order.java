@@ -1,8 +1,8 @@
 package com.bookstore.bookstore.entities;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Order {
 
@@ -12,7 +12,7 @@ public class Order {
 
     private User client;
 
-    private List<Product> products;
+    private Set<OrderItem> items;
 
     private Payment payment;
 

@@ -1,0 +1,43 @@
+package com.bookstore.bookstore.entities;
+
+import java.util.Objects;
+
+public class OrderItemPK {
+
+    private Product product;
+    private Order order;
+
+    public OrderItemPK() {
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderItemPK that = (OrderItemPK) o;
+        return Objects.equals(product, that.product) && Objects.equals(order, that.order);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(product);
+        result = 31 * result + Objects.hashCode(order);
+        return result;
+    }
+}
