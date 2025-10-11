@@ -1,15 +1,26 @@
 package com.bookstore.bookstore.entities;
 
+import jakarta.persistence.*;
+
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "tb_order")
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
+
     private StatusOrder status;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private User client;
 
     private Set<OrderItem> items;
