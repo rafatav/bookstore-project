@@ -25,6 +25,7 @@ public class Order {
 
     private Set<OrderItem> items;
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
     public Order() {
