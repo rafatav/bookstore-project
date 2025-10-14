@@ -23,7 +23,8 @@ public class Product {
     private Double price;
     private String imgUrl;
 
-    private List<Order> orders;
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
@@ -80,6 +81,14 @@ public class Product {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public List<Order> getOrders() {
+        return items.stream().map(OrderItem::getOrder).toList();
     }
 
     @Override

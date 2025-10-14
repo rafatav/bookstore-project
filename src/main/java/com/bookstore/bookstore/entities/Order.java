@@ -3,6 +3,8 @@ package com.bookstore.bookstore.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,7 +25,8 @@ public class Order {
     @JoinColumn(name = "client_id")
     private User client;
 
-    private Set<OrderItem> items;
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
@@ -59,6 +62,14 @@ public class Order {
 
     public void setStatus(StatusOrder status) {
         this.status = status;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public List<Product> getProducts() {
+        return items.stream().map(OrderItem::getProduct).toList();
     }
 
     @Override
