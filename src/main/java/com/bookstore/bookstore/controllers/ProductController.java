@@ -1,14 +1,12 @@
 package com.bookstore.bookstore.controllers;
 
 import com.bookstore.bookstore.dto.ProductDTO;
-import com.bookstore.bookstore.entities.Product;
 import com.bookstore.bookstore.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

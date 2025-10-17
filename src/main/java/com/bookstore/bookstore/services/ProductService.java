@@ -47,8 +47,7 @@ public class ProductService {
 
     @Transactional
     public void delete(Long id) {
-        Product product = repository.findById(id).get();
-        repository.delete(product);
+        repository.deleteById(id);
     }
 
     private void dtoToEntity(ProductDTO dto, Product product) {
