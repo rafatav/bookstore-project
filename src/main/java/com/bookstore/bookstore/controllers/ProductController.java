@@ -2,14 +2,16 @@ package com.bookstore.bookstore.controllers;
 
 import com.bookstore.bookstore.dto.ProductDTO;
 import com.bookstore.bookstore.services.ProductService;
+import jakarta.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @Controller
 @RequestMapping(value = "/products")
@@ -28,5 +30,13 @@ public class ProductController {
     public ResponseEntity<Page<ProductDTO>> getAll(Pageable pageable) {
         Page<ProductDTO> dto = service.findAll(pageable);
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> insert(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        dto = service.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto).toUri();
+
+        return ResponseEntity.created(uri).body(dto);
     }
 }

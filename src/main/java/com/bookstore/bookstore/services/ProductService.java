@@ -28,4 +28,19 @@ public class ProductService {
     public Page<ProductDTO> findAll(Pageable pageable) {
         return repository.findAll(pageable).map(ProductDTO::new);
     }
+
+    public ProductDTO insert(ProductDTO dto) {
+        Product product = dtoToEntity(dto);
+        repository.save(product);
+        return new ProductDTO(product);
+    }
+
+    private Product dtoToEntity(ProductDTO dto) {
+        Product product = new Product();
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setImgUrl(dto.getImgUrl());
+        return product;
+    }
 }
