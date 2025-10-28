@@ -3,12 +3,14 @@ package com.bookstore.bookstore.services;
 import com.bookstore.bookstore.dto.ProductDTO;
 import com.bookstore.bookstore.entities.Product;
 import com.bookstore.bookstore.repositories.ProductRepository;
+import com.bookstore.bookstore.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -19,9 +21,13 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
-        Optional<Product> result = repository.findById(id);
-        Product product = result.get();
-        return new ProductDTO(product);
+        try {
+            Optional<Product> result = repository.findById(id);
+            Product product = result.get();
+            return new ProductDTO(product);
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException("Resource Not Found");
+        }
     }
 
     @Transactional(readOnly = true)
