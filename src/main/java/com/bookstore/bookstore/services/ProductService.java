@@ -3,7 +3,9 @@ package com.bookstore.bookstore.services;
 import com.bookstore.bookstore.dto.ProductDTO;
 import com.bookstore.bookstore.entities.Product;
 import com.bookstore.bookstore.repositories.ProductRepository;
+import com.bookstore.bookstore.services.exceptions.DatabaseException;
 import com.bookstore.bookstore.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,10 +47,14 @@ public class ProductService {
 
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
-        Product product = repository.getReferenceById(id);
-        dtoToEntity(dto, product);
-        product = repository.save(product);
-        return new ProductDTO(product);
+        try {
+            Product product = repository.getReferenceById(id);
+            dtoToEntity(dto, product);
+            product = repository.save(product);
+            return new ProductDTO(product);
+        } catch (EntityNotFoundException e) {
+            throw new DatabaseException("Data Not Found");
+        }
     }
 
     @Transactional
