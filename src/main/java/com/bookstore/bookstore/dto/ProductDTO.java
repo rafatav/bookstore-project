@@ -1,12 +1,22 @@
 package com.bookstore.bookstore.dto;
 
 import com.bookstore.bookstore.entities.Product;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 public class ProductDTO {
 
     private Long id;
+
+    @Size(min = 3, max = 30, message = "Minimum 3, maximum 30 letters")
+    @NotBlank(message = "Required Field")
     private String name;
+
+    @Size(max = 30, message = "Maximum 30 letters")
     private String description;
+
+    @Positive(message = "Value must be positive")
     private Double price;
     private String imgUrl;
 
