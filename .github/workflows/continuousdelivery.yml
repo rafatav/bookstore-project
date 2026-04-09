@@ -14,5 +14,15 @@ jobs:
         with:
           name: project.zip
           path: |
-            '**.py'
+            **.py
             README.MD
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: delivery
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: project.zip
+      - name: Display structure of downloaded files
+        run: ls -R
