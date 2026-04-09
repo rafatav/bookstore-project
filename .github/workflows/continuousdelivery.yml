@@ -14,8 +14,8 @@ jobs:
         with:
           name: project.zip
           path: |
-            **.py
-            README.MD
+            **.java
+            README.md
 
   deploy:
     runs-on: ubuntu-latest
